@@ -1,7 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 import Container from "@mui/material/Container";
 import { Header } from "./components";
-import { Home, FullPost, Registration, AddPost, Login, TagPosts } from "./pages";
+import {
+  Home,
+  FullPost,
+  Registration,
+  AddPost,
+  Login,
+  TagPosts,
+} from "./pages";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchAuthMe, selectIsAuth } from "./redux/slices/auth";
@@ -21,7 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/posts/:id" element={<FullPost />} />
-          <Route path="/tags/:tag" element={<TagPosts/>} />
+          <Route path="/posts/tag/:tag" element={<TagPosts />} />
           <Route path="/posts/:id/edit" element={<AddPost />} />
           <Route path="/add-post" element={<AddPost />} />
           <Route path="/login" element={<Login />} />

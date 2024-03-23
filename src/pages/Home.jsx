@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Post } from "../components/Post";
 import { TagsBlock } from "../components/TagsBlock";
-import { CommentsBlock } from "../components/CommentsBlock";
 import {
   fetchPopularPosts,
   fetchPosts,

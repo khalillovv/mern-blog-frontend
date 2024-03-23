@@ -1,37 +1,54 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Grid from "@mui/material/Grid";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPostsByTag, fetchTags } from "../redux/slices/posts";
+import { Post, TagsBlock } from "../components";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { Post } from "../components/Post";
-import { blue } from "@mui/material/colors";
 
 export const TagPosts = () => {
-  const { tag } = useParams(); // Получаем имя тега из параметра маршрута
-  const { posts } = useSelector((state) => state.posts);
+  const { tag } = useParams();
+  const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth.data);
+  const { posts, tags } = useSelector((state) => state.posts);
 
-  const filteredPosts = posts.items.filter((post) =>
-    post.tags.includes(tag)
-  );
+  const isPostsLoading = posts.status === "loading";
+  const isTagsLoading = tags.status === "loading";
+
+  useEffect(() => {
+    dispatch(fetchPostsByTag(tag));
+    dispatch(fetchTags());
+  }, [dispatch, tag]); // Добавляем зависимость tag
 
   return (
     <>
-      <h1 style={{color: blue}}>#{tag}</h1>
-      {filteredPosts.map((post) => (
-        <Post
-          key={post._id}
-          id={post._id}
-          title={post.title}
-          imageUrl={
-            post.imageUrl ? `http://localhost:8080${post.imageUrl}` : ""
-          }
-          user={post.user}
-          createdAt={post.createdAt}
-          viewsCount={post.viewsCount}
-          commentsCount={3}
-          tags={post.tags}
-          isEditable={userData?._id === post.user._id}
-        />
-      ))}
+      <p style={{ color: "#7a7a7a", fontSize: "50px" }}>#{tag}</p>
+      <Grid container spacing={4}>
+        <Grid xs={8} item>
+          {(isPostsLoading ? [...Array(5)] : posts.items).map((obj, index) =>
+            isPostsLoading ? (
+              <Post key={index} isLoading={true} />
+            ) : (
+              <Post
+                key={obj._id}
+                id={obj._id}
+                title={obj.title}
+                imageUrl={
+                  obj.imageUrl ? `http://localhost:8080${obj.imageUrl}` : ""
+                }
+                user={obj.user}
+                createdAt={obj.createdAt}
+                viewsCount={obj.viewsCount}
+                commentsCount={3}
+                tags={obj.tags}
+                isEditable={userData?._id === obj.user._id}
+              />
+            )
+          )}
+        </Grid>
+        <Grid xs={4} item>
+          <TagsBlock items={tags.items} isLoading={isTagsLoading} />
+        </Grid>
+      </Grid>
     </>
   );
 };
