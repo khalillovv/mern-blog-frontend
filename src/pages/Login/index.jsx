@@ -30,7 +30,7 @@ export const Login = () => {
     const data = await dispatch(fetchAuth(values));
 
     if (!data.payload) {
-      return alert("Не удалось зарегистрироваться");
+      return alert("Не удалось войти");
     }
 
     if ("token" in data.payload) {
