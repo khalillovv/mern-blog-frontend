@@ -56,7 +56,7 @@ export const Home = () => {
                 title={obj.title}
                 imageUrl={
                   obj.imageUrl
-                    ? `https://mern-blog-backend-bice-seven.vercel.app${obj.imageUrl}`
+                    ? `https://mern-blog-backend-bice-seven.vercel.app/${obj.imageUrl}`
                     : ""
                 }
                 user={obj.user}
