@@ -34,7 +34,7 @@ export const TagPosts = () => {
                 title={obj.title}
                 imageUrl={
                   obj.imageUrl
-                    ? `https://mern-blog-backend-bice-seven.vercel.app/${obj.imageUrl}`
+                    ? `${process.env.REACT_APP_API_URL}${obj.imageUrl}`
                     : ""
                 }
                 user={obj.user}

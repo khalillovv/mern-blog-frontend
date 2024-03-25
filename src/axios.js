@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://mern-blog-backend-bice-seven.vercel.app",
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 // проверка авторизован ли пользователь

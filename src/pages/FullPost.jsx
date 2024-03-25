@@ -38,7 +38,7 @@ export const FullPost = () => {
         title={data.title}
         imageUrl={
           data.imageUrl
-            ? `https://mern-blog-backend-bice-seven.vercel.app/${data.imageUrl}`
+            ? `${process.env.REACT_APP_API_URL}${data.imageUrl}`
             : ""
         }
         user={data.user}
