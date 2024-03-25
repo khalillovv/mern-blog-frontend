@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 
 import { Post } from "../components/Post";
 
-import { Index } from "../components/AddComment";
-import { CommentsBlock } from "../components/CommentsBlock";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
